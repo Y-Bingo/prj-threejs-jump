@@ -8,7 +8,7 @@ module.exports = {
 	cache: {
 		type: 'filesystem',
 	},
-	entry: './src/index.ts',
+	entry: './src/main.ts',
 	output: {
 		filename: 'main.js',
 		path: path.resolve(__dirname, 'dist'),

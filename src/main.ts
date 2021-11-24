@@ -1,5 +1,3 @@
-export class Main {
-	constructor() {
-		console.log('hello world!!');
-	}
-}
+import Game from './game/game';
+
+new Game().init();
