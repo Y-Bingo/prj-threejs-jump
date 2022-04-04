@@ -31,11 +31,10 @@ export class Camera {
 		const h = this.sizes.displayHeight;
 		const aspect = w / h;
 		this.instance = new THREE.OrthographicCamera(
-			-FRUSTUM_SIZE,
-			FRUSTUM_SIZE,
-			FRUSTUM_SIZE * aspect,
-			-FRUSTUM_SIZE * aspect,
-
+			(FRUSTUM_SIZE * aspect) / -1,
+			(FRUSTUM_SIZE * aspect) / 1,
+			FRUSTUM_SIZE / 1,
+			FRUSTUM_SIZE / -1,
 			-100,
 			100,
 		);
@@ -43,12 +42,11 @@ export class Camera {
 		this.instance.lookAt(new THREE.Vector3(0, 0, 0));
 		this.scene.add(this.instance);
 
-		const axes = new THREE.AxesHelper(10);
-		axes.position.z = 100;
+		const axes = new THREE.AxesHelper(100);
 		this.scene.add(axes);
 
-		const cameraHelper = new THREE.CameraHelper(this.instance);
-		this.scene.add(cameraHelper);
+		// const cameraHelper = new THREE.CameraHelper(this.instance);
+		// this.scene.add(cameraHelper);
 	}
 
 	private setOrbitControl(): void {
@@ -63,10 +61,11 @@ export class Camera {
 		// this.instance.aspect = this.sizes.screenWidth / this.sizes.screenHeight;
 		const w = this.sizes.displayWidth;
 		const h = this.sizes.displayHeight;
-		this.instance.left = w / -2;
-		this.instance.right = w / 2;
-		this.instance.top = h / 2;
-		this.instance.bottom = h / -2;
+		const aspect = w / h;
+		this.instance.left = (FRUSTUM_SIZE * aspect) / -1;
+		this.instance.right = (FRUSTUM_SIZE * aspect) / 1;
+		this.instance.top = FRUSTUM_SIZE / 1;
+		this.instance.bottom = FRUSTUM_SIZE / -1;
 		this.instance.updateProjectionMatrix();
 	}
 
