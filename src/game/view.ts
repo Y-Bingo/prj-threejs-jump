@@ -1,5 +1,5 @@
-import GameOverPage from '../pages/game-over.page';
-import GamePage from '../pages/game-page';
+import GameOverPage from '../pages/GameOverPage';
+import GamePage from '../Pages/GamePage';
 
 export class GameView {
 	private name: string = 'gameView';
@@ -20,6 +20,12 @@ export class GameView {
 	public initGameOverPage(callbacks: () => void): void {
 		this.gameOverPage = new GameOverPage(callbacks);
 		this.gameOverPage.init();
+	}
+
+	public showGamePage(): void {
+		this.gamePage.show();
+		this.gamePage.restartGame();
+		this.gameOverPage.hide();
 	}
 
 	/**

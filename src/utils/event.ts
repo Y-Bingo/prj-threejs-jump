@@ -1,4 +1,4 @@
-class EEvent {
+export default class EEvent {
 	private sender: any;
 	private listeners: any[] = [];
 

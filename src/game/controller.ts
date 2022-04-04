@@ -1,5 +1,6 @@
-import { GameModel } from './model';
-import { GameView } from './view';
+import { EGamePage } from './Constants';
+import { GameModel } from './Model';
+import { GameView } from './View';
 
 export default class GameController {
 	private name: string = 'controller';
@@ -9,6 +10,17 @@ export default class GameController {
 	constructor() {
 		this.gameModel = new GameModel();
 		this.gameView = new GameView();
+		this.gameModel.stageChange.attach((sender, args) => {
+			const stageName = args.stage;
+			switch (stageName) {
+				case EGamePage.GAME_OVER:
+					this.gameView.showGameOverPage();
+					break;
+				case EGamePage.GAME_PAGE:
+					this.gameView.showGamePage();
+					break;
+			}
+		});
 	}
 
 	/**
@@ -16,28 +28,18 @@ export default class GameController {
 	 */
 	public initPages(): void {
 		const gamePageCallbacks = () => {
-			showGameOverPage: this.showGameOverPage;
+			showGameOverPage: () => {
+				this.gameModel.setStage(EGamePage.GAME_OVER);
+			};
 		};
 
 		const gameOverPageCallbacks = () => {
-			restartGame: this.restartGame;
+			restartGame: () => {
+				this.gameModel.setStage(EGamePage.GAME_PAGE);
+			};
 		};
 
 		this.gameView.initGamePage(gamePageCallbacks);
 		this.gameView.initGameOverPage(gameOverPageCallbacks);
-	}
-
-	/**
-	 * 显示 game-over-page
-	 */
-	private showGameOverPage(): void {
-		this.gameView.showGameOverPage();
-	}
-
-	/**
-	 * 重新开始游戏
-	 */
-	private restartGame(): void {
-		this.gameView.restartGame();
 	}
 }

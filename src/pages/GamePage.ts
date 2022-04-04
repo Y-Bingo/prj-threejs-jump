@@ -1,5 +1,7 @@
+import { EGamePage } from '../Game/Constants';
+
 export default class GamePage {
-	private name: string = 'gamePage';
+	private name: string = EGamePage.GAME_PAGE;
 
 	private cb: () => void;
 	constructor(callbacks: () => void) {
@@ -11,14 +13,20 @@ export default class GamePage {
 	 */
 	public init(): void {
 		console.log('init: ', this.name);
-
-    }
+	}
 
 	/**
 	 * 显示
 	 */
 	public show(): void {
 		console.log('show: ', this.name);
+	}
+
+	/**
+	 * 显示
+	 */
+	public hide(): void {
+		console.log('hide: ', this.name);
 	}
 
 	/**
