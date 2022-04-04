@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Sizes } from '../Utils/Sizes';
 import Application from './Application';
+import { FRUSTUM_SIZE } from './GameConfig';
 
 /**
  * My Camera
@@ -28,25 +29,26 @@ export class Camera {
 		// this.instance = new THREE.PerspectiveCamera();
 		const w = this.sizes.displayWidth;
 		const h = this.sizes.displayHeight;
+		const aspect = w / h;
 		this.instance = new THREE.OrthographicCamera(
-			w / -2,
-			w / 2,
-			h / 2,
-			h / -2,
+			-FRUSTUM_SIZE,
+			FRUSTUM_SIZE,
+			FRUSTUM_SIZE * aspect,
+			-FRUSTUM_SIZE * aspect,
 
 			-100,
 			100,
 		);
-		// this.instance.position.set();
-		// this.instance.lookAt(0, 0, 0);
+		this.instance.position.set(-10, 10, 10);
+		this.instance.lookAt(new THREE.Vector3(0, 0, 0));
 		this.scene.add(this.instance);
 
-		const axes = new THREE.AxesHelper(100);
+		const axes = new THREE.AxesHelper(10);
 		axes.position.z = 100;
 		this.scene.add(axes);
 
-		// const cameraHelper = new THREE.CameraHelper(this.instance);
-		// this.scene.add(cameraHelper);
+		const cameraHelper = new THREE.CameraHelper(this.instance);
+		this.scene.add(cameraHelper);
 	}
 
 	private setOrbitControl(): void {

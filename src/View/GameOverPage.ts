@@ -66,6 +66,7 @@ export default class GameOverPage {
 		this.pageContext.fillText('Game Over', w / 2 - 50, h / 2 + 5);
 		this.pageContext.restore();
 		this.pageTexture.needsUpdate = true;
+		this.obj.visible = false;
 		this.scene.add(this.obj);
 	}
 
@@ -73,6 +74,7 @@ export default class GameOverPage {
 	 * 显示
 	 */
 	public show(): void {
+		this.obj.visible = true;
 		console.log('show: ', this.name);
 	}
 
@@ -80,6 +82,7 @@ export default class GameOverPage {
 	 * 隐藏
 	 */
 	public hide(): void {
+		this.obj.visible = false;
 		console.log('hide: ', this.name);
 	}
 }

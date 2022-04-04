@@ -1,5 +1,5 @@
-import GameOverPage from '../pages/GameOverPage';
-import GamePage from '../Pages/GamePage';
+import GameOverPage from '../View/GameOverPage';
+import GamePage from '../View/GamePage';
 
 export class GameView {
 	private name: string = 'gameView';

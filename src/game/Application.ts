@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { Sizes } from '../Utils/Sizes';
 import { Time } from '../Utils/Time';
 import { Camera } from './Camera';
-import GameController from './Controller';
+import GameController from './GameController';
 import { Renderer } from './Renderer';
 
 /**

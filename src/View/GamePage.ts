@@ -1,11 +1,20 @@
+import Application from '../Game/Application';
 import { EGamePage } from '../Game/Constants';
 
 export default class GamePage {
 	private name: string = EGamePage.GAME_PAGE;
 
+	private app: Application;
+	private scene: THREE.Scene;
+	private;
+
 	private cb: () => void;
 	constructor(callbacks: () => void) {
 		this.cb = callbacks;
+
+		// setup
+		this.app = new Application();
+		this.scene = this.app.scene;
 	}
 
 	/**

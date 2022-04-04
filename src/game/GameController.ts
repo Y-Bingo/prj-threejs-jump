@@ -1,6 +1,6 @@
 import { EGamePage } from './Constants';
-import { GameModel } from './Model';
-import { GameView } from './View';
+import { GameModel } from './GameModel';
+import { GameView } from './GameView';
 
 export default class GameController {
 	private name: string = 'controller';

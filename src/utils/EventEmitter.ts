@@ -1,5 +1,5 @@
 /**
- * 事件派发器
+ * Event Dispatcher
  */
 export class EventEmitter {
 	private callbacks: any;
