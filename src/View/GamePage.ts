@@ -1,5 +1,7 @@
 import Application from '../Game/Application';
 import { EGamePage } from '../Game/Constants';
+import { Cuboid } from './Component/Cuboid';
+import { Cylinder } from './Component/Cylinder';
 
 export default class GamePage {
 	private name: string = EGamePage.GAME_PAGE;
@@ -22,6 +24,12 @@ export default class GamePage {
 	 */
 	public init(): void {
 		console.log('init: ', this.name);
+
+		const cuboid = new Cuboid(-15, 0, 0);
+		const cylinder = new Cylinder(23, 0, 0);
+
+		this.scene.add(cuboid.instance);
+		this.scene.add(cylinder.instance);
 	}
 
 	/**
