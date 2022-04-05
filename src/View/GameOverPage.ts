@@ -1,14 +1,9 @@
 import * as THREE from 'three';
-import Application from '../Game/Application';
 import { EGamePage } from '../Game/Constants';
-import { Sizes } from '../Utils/Sizes';
+import { GameBaseView } from './GameBaseView';
 
-export default class GameOverPage {
+export default class GameOverPage extends GameBaseView {
 	private name: string = EGamePage.GAME_OVER;
-	// inherit
-	private app: Application;
-	private scene: THREE.Scene;
-	private sizes: Sizes;
 	// private
 	private pageCanvas: HTMLCanvasElement;
 	private pageTexture: THREE.Texture;
@@ -19,12 +14,8 @@ export default class GameOverPage {
 
 	private cb: () => void;
 	constructor(callbacks: () => void) {
+		super();
 		this.cb = callbacks;
-
-		// setup
-		this.app = new Application();
-		this.scene = this.app.scene;
-		this.sizes = this.app.sizes;
 	}
 
 	public init(): void {

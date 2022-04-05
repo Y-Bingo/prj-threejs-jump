@@ -36,6 +36,7 @@ export default class GameController {
 			};
 		};
 
+		this.gameView.initPage();
 		this.gameView.initGamePage(gamePageCallbacks);
 		this.gameView.initGameOverPage(gameOverPageCallbacks);
 	}

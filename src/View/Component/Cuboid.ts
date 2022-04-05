@@ -1,4 +1,4 @@
-import * as THREE from 'three'; 
+import * as THREE from 'three';
 import { Block } from './Block';
 
 export class Cuboid extends Block {
@@ -10,7 +10,7 @@ export class Cuboid extends Block {
 		// setup
 		const size = w || this.width;
 		const geometry = new THREE.BoxGeometry(size, this.height, size);
-		const material = new THREE.MeshBasicMaterial({
+		const material = new THREE.MeshPhongMaterial({
 			color: 0xffffff,
 		});
 		this.instance = new THREE.Mesh(geometry, material);

@@ -10,7 +10,7 @@ export class Cylinder extends Block {
 		// setup
 		const size = w || this.width;
 		const geometry = new THREE.CylinderGeometry(size / 2, size / 2, this.height, 50);
-		const material = new THREE.MeshBasicMaterial({
+		const material = new THREE.MeshPhongMaterial({
 			color: 0xffffff,
 		});
 		this.instance = new THREE.Mesh(geometry, material);

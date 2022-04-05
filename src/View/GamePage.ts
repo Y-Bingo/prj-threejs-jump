@@ -2,16 +2,14 @@ import Application from '../Game/Application';
 import { EGamePage } from '../Game/Constants';
 import { Cuboid } from './Component/Cuboid';
 import { Cylinder } from './Component/Cylinder';
+import { GameBaseView } from './GameBaseView';
 
-export default class GamePage {
+export default class GamePage extends GameBaseView {
 	private name: string = EGamePage.GAME_PAGE;
-
-	private app: Application;
-	private scene: THREE.Scene;
-	private;
 
 	private cb: () => void;
 	constructor(callbacks: () => void) {
+		super();
 		this.cb = callbacks;
 
 		// setup
