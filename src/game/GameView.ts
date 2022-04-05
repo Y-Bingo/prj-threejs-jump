@@ -9,9 +9,6 @@ export class GameView {
 
 	constructor() {}
 
-	/**
-	 * @method 初始化游戏界面
-	 */
 	public initGamePage(callbacks: () => void): void {
 		this.gamePage = new GamePage(callbacks);
 		this.gamePage.init();
@@ -28,16 +25,10 @@ export class GameView {
 		this.gameOverPage.hide();
 	}
 
-	/**
-	 * 显示 gameOverPage
-	 */
 	public showGameOverPage(): void {
 		this.gameOverPage.show();
 	}
 
-	/**
-	 * 重新开始游戏
-	 */
 	public restartGame(): void {
 		this.gamePage.restartGame();
 	}

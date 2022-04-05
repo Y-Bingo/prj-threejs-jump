@@ -8,9 +8,7 @@ export class Time extends EventEmitter {
 	private current: number;
 	public elapsed: number;
 	public delta: number;
-	/**
-	 * constructor
-	 */
+
 	constructor() {
 		super();
 

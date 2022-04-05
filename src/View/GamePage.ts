@@ -19,36 +19,24 @@ export default class GamePage {
 		this.scene = this.app.scene;
 	}
 
-	/**
-	 * 初始化
-	 */
 	public init(): void {
 		console.log('init: ', this.name);
 
-		const cuboid = new Cuboid(-15, 0, 0);
-		const cylinder = new Cylinder(23, 0, 0);
+		const cuboid = new Cuboid(-10, 0, 0);
+		const cylinder = new Cylinder(10, 0, 0);
 
 		this.scene.add(cuboid.instance);
 		this.scene.add(cylinder.instance);
 	}
 
-	/**
-	 * 显示
-	 */
 	public show(): void {
 		console.log('show: ', this.name);
 	}
 
-	/**
-	 * 显示
-	 */
 	public hide(): void {
 		console.log('hide: ', this.name);
 	}
 
-	/**
-	 * 重新开始游戏
-	 */
 	public restartGame(): void {
 		console.log('restart game: ', this.name);
 	}

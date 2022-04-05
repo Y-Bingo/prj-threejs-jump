@@ -27,12 +27,9 @@ export default class GameOverPage {
 		this.sizes = this.app.sizes;
 	}
 
-	/**
-	 * 初始化
-	 */
 	public init(): void {
 		this.initGameOverCanvas();
-		console.log('init: ', this.name);
+		this.hide();
 	}
 
 	private initGameOverCanvas(): void {
@@ -66,21 +63,14 @@ export default class GameOverPage {
 		this.pageContext.fillText('Game Over', w / 2 - 50, h / 2 + 5);
 		this.pageContext.restore();
 		this.pageTexture.needsUpdate = true;
-		this.obj.visible = false;
 		this.scene.add(this.obj);
 	}
 
-	/**
-	 * 显示
-	 */
 	public show(): void {
 		this.obj.visible = true;
 		console.log('show: ', this.name);
 	}
 
-	/**
-	 * 隐藏
-	 */
 	public hide(): void {
 		this.obj.visible = false;
 		console.log('hide: ', this.name);

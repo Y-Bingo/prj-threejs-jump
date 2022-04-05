@@ -23,9 +23,6 @@ export default class GameController {
 		});
 	}
 
-	/**
-	 * 初始化页面
-	 */
 	public initPages(): void {
 		const gamePageCallbacks = () => {
 			showGameOverPage: () => {
