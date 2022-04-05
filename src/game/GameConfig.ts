@@ -6,3 +6,5 @@ export const BLOCK_CONF = {
 	W: 10,
 	H: 5,
 };
+
+export const BOTTLE_R = 10;

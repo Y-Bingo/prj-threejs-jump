@@ -1,5 +1,6 @@
 import Application from '../Game/Application';
 import { EGamePage } from '../Game/Constants';
+import { Bottle } from './Component/Bottle';
 import { Cuboid } from './Component/Cuboid';
 import { Cylinder } from './Component/Cylinder';
 import { GameBaseView } from './GameBaseView';
@@ -25,6 +26,9 @@ export default class GamePage extends GameBaseView {
 
 		this.scene.add(cuboid.instance);
 		this.scene.add(cylinder.instance);
+
+		const bottle = new Bottle();
+		this.scene.add(bottle.instance);
 	}
 
 	public show(): void {
