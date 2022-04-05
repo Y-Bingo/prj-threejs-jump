@@ -1,4 +1,5 @@
 import { Background } from '../View/Background';
+import { Floor } from '../View/Floor';
 import GameOverPage from '../View/GameOverPage';
 import GamePage from '../View/GamePage';
 import { Environment } from './Environment';
@@ -6,16 +7,19 @@ import { Environment } from './Environment';
 export class GameView {
 	private name: string = 'gameView';
 
-	private environment: Environment;
+	private floor: Floor;
 	private background: Background;
+	private environment: Environment;
+
 	private gamePage: GamePage;
 	private gameOverPage: GameOverPage;
 
 	constructor() {}
 
 	public initPage(): void {
-		this.environment = new Environment();
+		this.floor = new Floor();
 		this.background = new Background();
+		this.environment = new Environment();
 	}
 
 	public initGamePage(callbacks: () => void): void {
