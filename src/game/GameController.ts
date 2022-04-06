@@ -4,8 +4,8 @@ import { GameView } from './GameView';
 
 export default class GameController {
 	private name: string = 'controller';
-	private gameView: GameView;
-	private gameModel: GameModel;
+	public gameView: GameView;
+	public gameModel: GameModel;
 
 	constructor() {
 		this.gameModel = new GameModel();
