@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import assetsConfig from '../../resource/assets.res.json';
+import { RES } from '../Utils/Resource';
 import { Sizes } from '../Utils/Sizes';
 import { Time } from '../Utils/Time';
 import { Camera } from './Camera';
@@ -51,10 +53,14 @@ export default class Application {
 	private update(): void {
 		this.camera.update();
 		this.renderer.update();
+
+		this.gameController.gameView.onUpdate();
 	}
 
 	private onResize(): void {
 		this.resize();
+
+		this.gameController.gameView.onResize();
 	}
 
 	private onTick(): void {
@@ -67,7 +73,11 @@ export default class Application {
 		this.renderer.resize();
 	}
 	public init(): void {
-		this.gameController.initPages();
+		RES.loadConfig(assetsConfig);
+		RES.on('loaded', () => {
+			this.gameController.initPages();
+			this.gameController.gameStart();
+		});
 	}
 
 	public destroy(): void {

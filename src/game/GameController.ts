@@ -40,4 +40,8 @@ export default class GameController {
 		this.gameView.initGamePage(gamePageCallbacks);
 		this.gameView.initGameOverPage(gameOverPageCallbacks);
 	}
+
+    public gameStart(): void {
+        this.gameView.showGamePage();
+    }
 }

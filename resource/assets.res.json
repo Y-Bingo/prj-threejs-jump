@@ -1,0 +1,17 @@
+[
+	{
+		"name": "bottom_png",
+		"type": "texture",
+		"path": "./resource/assets/bottom.png"
+	},
+	{
+		"name": "middle_png",
+		"type": "texture",
+		"path": "./resource/assets/middle.png"
+	},
+	{
+		"name": "head_png",
+		"type": "texture",
+		"path": "./resource/assets/head.png"
+	}
+]
