@@ -8,6 +8,8 @@ import { GameBaseView } from './GameBaseView';
 export default class GamePage extends GameBaseView {
 	private name: string = EGamePage.GAME_PAGE;
 
+	private bottle: Bottle;
+
 	private cb: () => void;
 	constructor(callbacks: () => void) {
 		super();
@@ -26,9 +28,9 @@ export default class GamePage extends GameBaseView {
 
 		this.scene.add(cuboid.instance);
 		this.scene.add(cylinder.instance);
-
-		const bottle = new Bottle();
-		this.scene.add(bottle.instance);
+        
+		this.bottle = new Bottle();
+		this.scene.add(this.bottle.instance);
 	}
 
 	public show(): void {
@@ -41,5 +43,11 @@ export default class GamePage extends GameBaseView {
 
 	public restartGame(): void {
 		console.log('restart game: ', this.name);
+	}
+
+	public onResize(): void {}
+
+	public onUpdate(): void {
+		this.bottle.onUpdate();
 	}
 }

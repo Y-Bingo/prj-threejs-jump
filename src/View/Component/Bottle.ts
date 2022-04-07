@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { RES } from '../../Utils/Resource';
 
 /**
  * Bottle
@@ -16,12 +17,12 @@ export class Bottle {
 
 		// texture
 		const textureLoader = new THREE.TextureLoader();
-		const headTexture = textureLoader.load('./resource/assets/bottom.png');
-		const middleTexture = textureLoader.load('./resource/assets/bottom.png');
-		const bottomTexture = textureLoader.load('./resource/assets/bottom.png');
+		const headTexture = RES.getRes('bottom_png') as THREE.Texture;
+		const middleTexture = RES.getRes('bottom_png') as THREE.Texture;
+		const bottomTexture = RES.getRes('bottom_png') as THREE.Texture;
 
 		const headMaterial = new THREE.MeshBasicMaterial({ map: headTexture });
-		const head = new THREE.Mesh(new THREE.SphereGeometry(0.6 * headRadius, 50, 50), headMaterial);
+		const head = new THREE.Mesh(new THREE.OctahedronGeometry(0.6 * headRadius), headMaterial);
 		head.position.y += 3.3 * headRadius;
 
 		const body = new THREE.Group();
@@ -37,5 +38,9 @@ export class Bottle {
 		body.add(body3);
 		this.instance.add(head);
 		this.instance.add(body);
+	}
+
+	public onUpdate(): void {
+		this.instance.rotation.y += 0.06;
 	}
 }

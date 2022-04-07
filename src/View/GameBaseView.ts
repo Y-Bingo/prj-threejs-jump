@@ -20,7 +20,11 @@ export class GameBaseView {
 		this.camera = this.app.camera;
 	}
 
-	protected onCreate(): void {}
+	public onCreate(): void {}
 
-	protected onDestroy(): void {}
+	public onUpdate(): void {}
+
+	public onResize(): void {}
+
+	public onDestroy(): void {}
 }
