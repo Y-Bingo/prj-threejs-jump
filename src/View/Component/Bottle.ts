@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { BOTTLE_CONF } from '../../Game/GameConfig';
 import { RES } from '../../Utils/Resource';
-import { customAnimation } from '../../Utils/Tween';
+import { Tween } from '../../Utils/Tween';
 
 /**
  * Bottle
@@ -40,27 +40,21 @@ export class Bottle {
 		body.add(body3);
 		this.instance.add(head);
 		this.instance.add(body);
-        body1.castShadow = true;
-        body2.castShadow = true;
+		body1.castShadow = true;
+		body2.castShadow = true;
 		body3.castShadow = true;
 		// this.instance.castShadow = true;
 		// this.instance.receiveShadow = true;
 	}
 
 	public showUp(): void {
-		customAnimation.to(
-			1,
-			this.instance.position,
-			{
-				x: BOTTLE_CONF.startX,
-				y: BOTTLE_CONF.startY,
-				z: BOTTLE_CONF.startZ,
-			},
-			'linear',
-			() => {
-				console.log('bottle show up end');
-			},
-		);
+		Tween.to(this.instance.position, {
+			duration: 0.75,
+			x: BOTTLE_CONF.startX,
+			y: BOTTLE_CONF.startY,
+			z: BOTTLE_CONF.startZ,
+			ease: 'bounce.out',
+		});
 	}
 
 	public onUpdate(): void {
