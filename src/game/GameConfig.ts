@@ -1,10 +1,11 @@
-// frustum_size
+/** frustum_size */
 export const FRUSTUM_SIZE = 40;
 
-// block config
+/** block config */
 export const BLOCK_CONF = {
-	W: 10,
-	H: 5,
+	width: 10,
+	height: 5,
 };
 
-export const BOTTLE_R = 10;
+/** bottle config */
+export const BOTTLE_CONF = { radius: 1.9, startX: -10, startY: 5, startZ: 0 };

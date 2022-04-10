@@ -16,7 +16,7 @@ export class Floor extends GameBaseView {
 		const material = new THREE.ShadowMaterial({ color: 0x000000, opacity: 0.3, transparent: true });
 		const mesh = new THREE.Mesh(geometry, material);
 		mesh.rotation.x = -Math.PI * 0.5;
-		mesh.position.y = -BLOCK_CONF.H / 2;
+		mesh.position.y = -BLOCK_CONF.height / 2;
 		mesh.receiveShadow = true;
 
 		this.scene.add(mesh);

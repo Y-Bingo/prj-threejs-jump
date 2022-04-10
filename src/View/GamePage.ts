@@ -28,12 +28,13 @@ export default class GamePage extends GameBaseView {
 
 		this.scene.add(cuboid.instance);
 		this.scene.add(cylinder.instance);
-        
+
 		this.bottle = new Bottle();
 		this.scene.add(this.bottle.instance);
 	}
 
 	public show(): void {
+		this.bottle.showUp();
 		console.log('show: ', this.name);
 	}
 

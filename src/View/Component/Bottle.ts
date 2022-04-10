@@ -1,5 +1,7 @@
 import * as THREE from 'three';
+import { BOTTLE_CONF } from '../../Game/GameConfig';
 import { RES } from '../../Utils/Resource';
+import { customAnimation } from '../../Utils/Tween';
 
 /**
  * Bottle
@@ -11,9 +13,9 @@ export class Bottle {
 		// setup
 		this.instance = new THREE.Group();
 		this.instance.name = 'bottle';
-		this.instance.position.set(-10, 5, 0);
+		this.instance.position.set(BOTTLE_CONF.startX, BOTTLE_CONF.startY + 30, BOTTLE_CONF.startZ);
 
-		let headRadius = 1.9;
+		let headRadius = BOTTLE_CONF.radius;
 
 		// texture
 		const textureLoader = new THREE.TextureLoader();
@@ -38,6 +40,27 @@ export class Bottle {
 		body.add(body3);
 		this.instance.add(head);
 		this.instance.add(body);
+        body1.castShadow = true;
+        body2.castShadow = true;
+		body3.castShadow = true;
+		// this.instance.castShadow = true;
+		// this.instance.receiveShadow = true;
+	}
+
+	public showUp(): void {
+		customAnimation.to(
+			1,
+			this.instance.position,
+			{
+				x: BOTTLE_CONF.startX,
+				y: BOTTLE_CONF.startY,
+				z: BOTTLE_CONF.startZ,
+			},
+			'linear',
+			() => {
+				console.log('bottle show up end');
+			},
+		);
 	}
 
 	public onUpdate(): void {
