@@ -36,7 +36,7 @@ export class Bottle {
 		const headMaterial = new THREE.MeshBasicMaterial({ map: headTexture });
 
 		// head
-		const head = new THREE.Mesh(new THREE.OctahedronGeometry(0.6 * headRadius), headMaterial);
+		const head = new THREE.Mesh(new THREE.OctahedronGeometry(0.8 * headRadius), headMaterial);
 		head.position.y += 3.3 * headRadius;
 		// head.castShadow = true;
 		this.head = head;
