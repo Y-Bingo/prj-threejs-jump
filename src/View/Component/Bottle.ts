@@ -8,28 +8,45 @@ import { Tween } from '../../Utils/Tween';
  */
 export class Bottle {
 	public instance: THREE.Group;
+	private box: THREE.Group;
+	private head: THREE.Mesh;
+	private body: THREE.Group;
+
+	private direction: number;
+	private axis: number;
 
 	constructor() {
+		//
+		this.direction = 0;
+		this.axis = 0;
+
 		// setup
+		// instance
 		this.instance = new THREE.Group();
 		this.instance.name = 'bottle';
 		this.instance.position.set(BOTTLE_CONF.startX, BOTTLE_CONF.startY + 30, BOTTLE_CONF.startZ);
+		// the whole
+		this.box = new THREE.Group();
+		this.instance.add(this.box);
 
 		let headRadius = BOTTLE_CONF.radius;
-
-		// texture
-		const textureLoader = new THREE.TextureLoader();
 		const headTexture = RES.getRes('bottom_png') as THREE.Texture;
 		const middleTexture = RES.getRes('bottom_png') as THREE.Texture;
 		const bottomTexture = RES.getRes('bottom_png') as THREE.Texture;
-
 		const headMaterial = new THREE.MeshBasicMaterial({ map: headTexture });
+
+		// head
 		const head = new THREE.Mesh(new THREE.OctahedronGeometry(0.6 * headRadius), headMaterial);
 		head.position.y += 3.3 * headRadius;
+		// head.castShadow = true;
+		this.head = head;
 
-		const body = new THREE.Group();
+		// body
 		const middleMaterial = new THREE.MeshBasicMaterial({ map: middleTexture });
 		const bottomMaterial = new THREE.MeshBasicMaterial({ map: bottomTexture });
+		const body = new THREE.Group();
+		this.body = body;
+
 		const body1 = new THREE.Mesh(new THREE.CylinderGeometry(0.7 * headRadius, 0.6 * headRadius, headRadius, 50), middleMaterial);
 		body1.position.y += headRadius;
 		const body2 = new THREE.Mesh(new THREE.SphereGeometry(0.7 * headRadius, 50, 50), middleMaterial);
@@ -38,13 +55,13 @@ export class Bottle {
 		body.add(body1);
 		body.add(body2);
 		body.add(body3);
-		this.instance.add(head);
-		this.instance.add(body);
+
 		body1.castShadow = true;
 		body2.castShadow = true;
 		body3.castShadow = true;
-		// this.instance.castShadow = true;
-		// this.instance.receiveShadow = true;
+
+		this.box.add(head);
+		this.box.add(body);
 	}
 
 	public showUp(): void {
@@ -57,7 +74,74 @@ export class Bottle {
 		});
 	}
 
+	public setDirection(direction: number, axis: number): void {
+		this.direction = direction;
+		this.axis = axis;
+	}
+
+	public rotate(): void {
+		const scale = 1.4;
+		this.box.rotation.x = this.box.rotation.z = 0;
+		if (this.direction == 0) {
+			// x
+			Tween.to(this.box.rotation, { duration: 0.14, z: this.box.rotation.z - Math.PI });
+			Tween.to(this.box.rotation, { duration: 0.18, z: this.box.rotation.z - 2 * Math.PI, ease: 'linear', delay: 0.14 });
+			Tween.to(this.head.position, { duration: 0.1, y: this.head.position.y + 0.9 * scale, x: this.head.position.x + 0.45 * scale });
+			Tween.to(this.head.position, {
+				duration: 0.1,
+				y: this.head.position.y - 0.9 * scale,
+				x: this.head.position.x - 0.45 * scale,
+				ease: 'linear',
+				delay: 0.1,
+			});
+			Tween.to(this.head.position, { duration: 0.15, y: BOTTLE_CONF.radius * 3.3, x: 0, ease: 'linear', delay: 0.25 });
+			Tween.to(this.body.scale, {
+				duration: 0.1,
+				y: Math.max(scale, 1),
+				x: Math.max(Math.min(1 / scale, 1), 0.7),
+				z: Math.max(Math.min(1 / scale, 1), 0.7),
+			});
+			Tween.to(this.body.scale, {
+				duration: 0.1,
+				y: Math.min(0.9 / scale, 0.7),
+				x: Math.max(scale, 1.2),
+				z: Math.max(scale, 1.2),
+				ease: 'linear',
+				delay: 0.1,
+			});
+			Tween.to(this.body.scale, { duration: 0.3, y: 1, x: 1, z: 1, ease: 'linear', delay: 0.2 });
+		} else if (this.direction == 1) {
+			// y
+			Tween.to(this.box.rotation, { duration: 0.14, x: this.box.rotation.x - Math.PI });
+			Tween.to(this.box.rotation, { duration: 0.18, x: this.box.rotation.x - 2 * Math.PI, ease: 'linear', delay: 0.14 });
+			Tween.to(this.head.position, { duration: 0.1, y: this.head.position.y + 0.9 * scale, z: this.head.position.z - 0.45 * scale });
+			Tween.to(this.head.position, {
+				duration: 0.1,
+				z: this.head.position.z + 0.45 * scale,
+				y: this.head.position.y - 0.9 * scale,
+				ease: 'linear',
+				delay: 0.1,
+			});
+			Tween.to(this.head.position, { duration: 0.15, y: BOTTLE_CONF.radius * 3.3, z: 0, ease: 'linear', delay: 0.25 });
+			Tween.to(this.body.scale, {
+				duration: 0.05,
+				y: Math.max(scale, 1),
+				x: Math.max(Math.min(1 / scale, 1), 0.7),
+				z: Math.max(Math.min(1 / scale, 1), 0.7),
+			});
+			Tween.to(this.body.scale, {
+				duration: 0.05,
+				y: Math.min(0.9 / scale, 0.7),
+				x: Math.max(scale, 1.2),
+				z: Math.max(scale, 1.2),
+				ease: 'linear',
+				delay: 0.1,
+			});
+			Tween.to(this.body.scale, { duration: 0.2, y: 1, x: 1, z: 1, ease: 'linear', delay: 0.2 });
+		}
+	}
+
 	public onUpdate(): void {
-		this.instance.rotation.y += 0.06;
+		this.head.rotation.y += 0.06;
 	}
 }

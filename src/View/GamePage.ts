@@ -33,13 +33,46 @@ export default class GamePage extends GameBaseView {
 		this.scene.add(this.bottle.instance);
 	}
 
+	private mouseDownCallback: () => void;
+	private mouseUpCallback: () => void;
+	private addEvent(): void {
+		console.log('gamePage add Event');
+		this.mouseDownCallback = () => {
+			this.onMouseDown();
+		};
+		this.mouseUpCallback = () => {
+			this.onMouseUp();
+		};
+		this.canvas.addEventListener('mousedown', this.mouseDownCallback);
+		this.canvas.addEventListener('mouseup', this.mouseUpCallback);
+	}
+
+	private removeEvent(): void {
+		console.log('gamePage remove Event');
+		this.canvas.removeEventListener('mousedown', this.mouseDownCallback);
+		this.canvas.removeEventListener('mouseup', this.mouseUpCallback);
+		this.mouseDownCallback = null;
+		this.mouseUpCallback = null;
+	}
+
+	private onMouseDown(): void {
+		// console.log('on mouse down');
+	}
+
+	private onMouseUp(): void {
+		// console.log('on mouse up');
+		this.bottle.rotate();
+	}
+
 	public show(): void {
 		this.bottle.showUp();
 		console.log('show: ', this.name);
+		this.addEvent();
 	}
 
 	public hide(): void {
 		console.log('hide: ', this.name);
+		this.removeEvent();
 	}
 
 	public restartGame(): void {
