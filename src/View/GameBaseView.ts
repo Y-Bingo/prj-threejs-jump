@@ -11,6 +11,7 @@ export class GameBaseView {
 	protected scene: THREE.Scene;
 	protected sizes: Sizes;
 	protected camera: Camera;
+	protected canvas: HTMLCanvasElement;
 
 	constructor() {
 		// setup
@@ -18,6 +19,7 @@ export class GameBaseView {
 		this.scene = this.app.scene;
 		this.sizes = this.app.sizes;
 		this.camera = this.app.camera;
+		this.canvas = this.app.canvas;
 	}
 
 	public onCreate(): void {}
