@@ -1,5 +1,6 @@
 import Application from '../Game/Application';
 import { EGamePage } from '../Game/Constants';
+import { Block } from './Component/Block';
 import { Bottle } from './Component/Bottle';
 import { Cuboid } from './Component/Cuboid';
 import { Cylinder } from './Component/Cylinder';
@@ -9,6 +10,7 @@ export default class GamePage extends GameBaseView {
 	private name: string = EGamePage.GAME_PAGE;
 
 	private bottle: Bottle;
+	private currentBlock: Block;
 
 	private cb: () => void;
 	constructor(callbacks: () => void) {
@@ -31,6 +33,8 @@ export default class GamePage extends GameBaseView {
 
 		this.bottle = new Bottle();
 		this.scene.add(this.bottle.instance);
+
+		this.currentBlock = cuboid;
 	}
 
 	private mouseDownCallback: () => void;
@@ -57,11 +61,15 @@ export default class GamePage extends GameBaseView {
 
 	private onMouseDown(): void {
 		// console.log('on mouse down');
+		this.bottle.startShrink();
+		this.currentBlock?.startShrink();
 	}
 
 	private onMouseUp(): void {
 		// console.log('on mouse up');
-		this.bottle.rotate();
+		// this.bottle.rotate();
+		this.bottle.stopShrink();
+		this.currentBlock?.rebound();
 	}
 
 	public show(): void {
@@ -82,6 +90,7 @@ export default class GamePage extends GameBaseView {
 	public onResize(): void {}
 
 	public onUpdate(): void {
-		this.bottle.onUpdate();
+		this.bottle?.onUpdate();
+		this.currentBlock?.onUpdate();
 	}
 }

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { BOTTLE_CONF } from '../../Game/GameConfig';
+import { BLOCK_CONF, BOTTLE_CONF } from '../../Game/GameConfig';
 import { RES } from '../../Utils/Resource';
 import { Tween } from '../../Utils/Tween';
 
@@ -15,10 +15,13 @@ export class Bottle {
 	private direction: number;
 	private axis: number;
 
+	private status: string;
+
 	constructor() {
 		//
 		this.direction = 0;
 		this.axis = 0;
+		this.status = 'stand';
 
 		// setup
 		// instance
@@ -141,7 +144,39 @@ export class Bottle {
 		}
 	}
 
+	private scale: number = 1;
+	private shrink(): void {
+		const MIN_SCALE = 0.55;
+		const HORIZON_DELTA_SCALE = 0.007;
+		const DELTA_SCALE = 0.005;
+		const HEAD_DELTA = 0.02;
+
+		this.scale = Math.max(this.scale - DELTA_SCALE, MIN_SCALE);
+		if (this.scale <= MIN_SCALE) return;
+
+		this.body.scale.y = this.scale;
+		this.body.scale.x += HORIZON_DELTA_SCALE;
+		this.body.scale.z += HORIZON_DELTA_SCALE;
+		this.head.position.y -= HEAD_DELTA;
+
+		const bottleDeltaY = HEAD_DELTA / 2;
+		const deltaY = (BLOCK_CONF.height * DELTA_SCALE) / 2;
+		this.instance.position.y -= bottleDeltaY + deltaY * 2;
+	}
+
+	public startShrink(): void {
+		this.status = 'shrink';
+	}
+
+	public stopShrink(): void {
+		this.scale = 1;
+		this.status = 'stop';
+	}
+
 	public onUpdate(): void {
 		this.head.rotation.y += 0.06;
+		if (this.status === 'shrink') {
+			this.shrink();
+		}
 	}
 }
