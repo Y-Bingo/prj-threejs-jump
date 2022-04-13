@@ -8,4 +8,4 @@ export const BLOCK_CONF = {
 };
 
 /** bottle config */
-export const BOTTLE_CONF = { radius: 1.9, startX: -10, startY: 4.5, startZ: 0 };
+export const BOTTLE_CONF = { radius: 1.9, startX: -10, startY: 4.3, startZ: 0 };

@@ -1,4 +1,5 @@
 import { BLOCK_CONF } from '../../Game/GameConfig';
+import { Tween } from '../../Utils/Tween';
 
 /**
  * Block
@@ -21,11 +22,21 @@ export class Block {
 
 	public startShrink(): void {
 		this.status = 'shrink';
+		this.twScale?.pause();
+		this.twPosition?.pause();
+		this.twScale = null;
+		this.twPosition = null;
 	}
 
+	private twScale: gsap.core.Tween;
+	private twPosition: gsap.core.Tween;
 	public rebound(): void {
 		this.status = 'stop';
 		this.scale = 1;
+		this.twScale?.pause();
+		this.twPosition?.pause();
+		this.twScale = Tween.to(this.instance.scale, { y: 1, duration: 0.5, ease: 'elastic.out(1.2, 0.5)' });
+		this.twPosition = Tween.to(this.instance.position, { y: 0, duration: 0.5, ease: 'elastic.out(1.2, 0.5)' });
 	}
 
 	private shrink(): void {

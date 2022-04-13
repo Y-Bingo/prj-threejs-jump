@@ -1,5 +1,5 @@
-export { gsap as Tween } from 'gsap';
-
+import { gsap as Tween } from 'gsap';
+export { Tween };
 // /**
 //  * Tween
 //  */

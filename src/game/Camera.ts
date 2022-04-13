@@ -38,7 +38,8 @@ export class Camera {
 			-100,
 			100,
 		);
-		this.instance.position.set(-10, 10, 10);
+		this.instance.position.set(0, 0, 10);
+		// this.instance.position.set(-10, 10, 10);
 		this.instance.lookAt(new THREE.Vector3(0, 0, 0));
 		this.scene.add(this.instance);
 
